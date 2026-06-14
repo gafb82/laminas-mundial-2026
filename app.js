@@ -1036,12 +1036,11 @@ function duplicateShareText(user = currentUser()) {
   ]);
 
   return [
-    `Tengo estas laminas repetidas disponibles para cambiar en ${state.community.name || state.community.code}:`,
+    "Hola! Estoy cambiando laminas del album Panini FIFA World Cup 2026.",
+    `Estas son mis laminas repetidas disponibles en ${state.community.name || state.community.code}:`,
     "",
     ...groupedLines,
-    "No comparto mi departamento ni ubicacion por este mensaje.",
-    "",
-    "Revisa la comunidad en Laminas Mundial 2026:",
+    "Estoy llevando el registro en la app Laminas Mundial 2026:",
     window.location.origin
   ].join("\n");
 }
