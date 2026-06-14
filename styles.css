@@ -715,11 +715,12 @@ textarea {
 
 .sticker-actions {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
 }
 
 .sticker-actions button {
+  min-width: 0;
   min-height: 28px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -727,6 +728,7 @@ textarea {
   color: var(--muted);
   font-size: 0.72rem;
   font-weight: 900;
+  padding-inline: 5px;
 }
 
 .sticker-card.has-owned .owned-btn,
@@ -995,6 +997,7 @@ textarea {
   background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.72);
   box-shadow: 0 10px 22px rgba(5, 24, 43, 0.16);
+  overflow: hidden;
 }
 
 .sticker-card.is-dimmed {
@@ -1308,5 +1311,58 @@ textarea {
   .album-page-right {
     border-radius: 8px;
     border-right: 0;
+  }
+
+  .album-layout {
+    gap: 10px;
+  }
+
+  .album-layout .sticker-card {
+    min-height: 106px;
+    padding: 7px;
+  }
+
+  .album-slot {
+    min-height: 62px;
+    padding: 7px 5px;
+  }
+
+  .album-slot strong {
+    font-size: 0.88rem;
+  }
+
+  .album-slot span {
+    font-size: 0.6rem;
+  }
+
+  .slot-flag-img {
+    width: 34px;
+    height: 23px;
+  }
+
+  .sticker-actions {
+    gap: 4px;
+  }
+
+  .sticker-actions button {
+    min-height: 30px;
+    border-radius: 7px;
+    font-size: 0.64rem;
+    padding-inline: 2px;
+  }
+}
+
+@media (max-width: 460px) {
+  .album-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .album-page-label,
+  .album-page-feature {
+    min-height: auto;
+  }
+
+  .album-page-label {
+    align-items: flex-start;
   }
 }
