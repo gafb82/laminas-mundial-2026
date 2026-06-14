@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laminas Mundial 2026</title>
+    <link rel="stylesheet" href="styles.css?v=20260613-album-spread">
+  </head>
+  <body>
+    <section class="auth-gate hidden" id="authGate" aria-live="polite">
+      <div class="auth-card">
+        <div class="brand auth-brand">
+          <span class="brand-mark">26</span>
+          <div>
+            <strong>Laminas Mundial</strong>
+            <small>Cuenta online y comunidad privada</small>
+          </div>
+        </div>
+
+        <div class="auth-copy">
+          <p class="eyebrow">Acceso</p>
+          <h1 id="authTitle">Entra para conservar tus laminas online</h1>
+          <p id="authHelp">Usa el email y la contrasena de tu cuenta. Si aun no tienes una, cambia a Crear cuenta.</p>
+        </div>
+
+        <div class="auth-tabs" role="tablist" aria-label="Modo de acceso">
+          <button class="active" data-auth-mode="signin" type="button">Entrar</button>
+          <button data-auth-mode="signup" type="button">Crear cuenta</button>
+        </div>
+
+        <form class="auth-form" id="authForm">
+          <label>
+            Email
+            <input id="authEmail" required type="email" autocomplete="email" placeholder="tu@email.com">
+          </label>
+          <label>
+            Contrasena
+            <input id="authPassword" required type="password" autocomplete="current-password" minlength="6" placeholder="Minimo 6 caracteres">
+          </label>
+          <label class="hidden" id="authPasswordConfirmWrap">
+            Confirmar contrasena
+            <input id="authPasswordConfirm" type="password" autocomplete="new-password" minlength="6" placeholder="Repite la contrasena">
+          </label>
+          <p class="auth-message" id="authMessage"></p>
+          <div class="auth-actions">
+            <button class="primary full" id="authSubmitButton" type="submit">Entrar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="auth-gate hidden" id="profileGate" aria-live="polite">
+      <div class="auth-card">
+        <div class="auth-copy">
+          <p class="eyebrow">Primer ingreso</p>
+          <h1>Configura tu comunidad</h1>
+          <p>Usa el codigo de invitacion entregado por el administrador o crea una comunidad nueva.</p>
+        </div>
+        <form class="auth-form" id="profileForm">
+          <label>
+            Nombre visible
+            <input id="profileName" required placeholder="Ej: Gonzalo">
+          </label>
+          <label>
+            Dato privado de contacto o ubicacion
+            <input id="profileLocation" required placeholder="Ej: Depto 1204 o WhatsApp apoderado">
+          </label>
+          <label>
+            Codigo de comunidad
+            <input id="profileCommunityCode" required value="CONDO-2026">
+          </label>
+          <label>
+            Nombre de comunidad nueva
+            <input id="profileCommunityName" placeholder="Solo si el codigo no existe">
+          </label>
+          <button class="primary" type="submit">Guardar perfil</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">26</span>
+          <div>
+            <strong>Laminas Mundial</strong>
+            <small>Intercambios comunitarios</small>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Secciones">
+          <button class="nav-item active" data-view="dashboard" type="button">Inicio</button>
+          <button class="nav-item" data-view="album" type="button">Mi album</button>
+          <button class="nav-item" data-view="matches" type="button">Matches</button>
+          <button class="nav-item" data-view="requests" type="button">Solicitudes</button>
+          <button class="nav-item" data-view="community" type="button">Comunidad</button>
+        </nav>
+
+        <div class="profile-card">
+          <label for="currentUser">Perfil activo</label>
+          <select id="currentUser"></select>
+          <p class="sync-status" id="syncStatus">Modo demo local</p>
+          <button class="secondary full" id="seedDemo" type="button">Reiniciar demo</button>
+          <button class="secondary full hidden" id="logoutButton" type="button">Cerrar sesion</button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Comunidad privada</p>
+            <h1 id="pageTitle">Panel de intercambio</h1>
+          </div>
+          <div class="community-code">
+            <span>Codigo</span>
+            <strong id="communityCode">CONDO-2026</strong>
+          </div>
+        </header>
+
+        <section class="view active" id="dashboard">
+          <div class="stats-grid">
+            <article class="stat">
+              <span>Completadas</span>
+              <strong id="ownedCount">0</strong>
+              <small id="ownedPct">0% del album</small>
+            </article>
+            <article class="stat">
+              <span>Faltantes</span>
+              <strong id="missingCount">0</strong>
+              <small>Prioridad de busqueda</small>
+            </article>
+            <article class="stat">
+              <span>Repetidas</span>
+              <strong id="duplicateCount">0</strong>
+              <small>Disponibles para cambiar</small>
+            </article>
+            <article class="stat">
+              <span>Matches</span>
+              <strong id="matchCount">0</strong>
+              <small>Con vecinos o companeros</small>
+            </article>
+          </div>
+
+          <div class="two-column">
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Accion rapida</p>
+                  <h2>Cargar laminas por codigo</h2>
+                </div>
+              </div>
+              <form class="quick-form" id="quickForm">
+                <label>
+                  Codigos
+                  <textarea id="quickInput" placeholder="Ej: ECU 1, ECU 2, BIH 20, ARG-10"></textarea>
+                </label>
+                <div class="segmented" role="group" aria-label="Tipo de carga">
+                  <label><input checked name="quickMode" type="radio" value="owned"> Tengo</label>
+                  <label><input name="quickMode" type="radio" value="missing"> Me falta</label>
+                  <label><input name="quickMode" type="radio" value="duplicates"> Repetida</label>
+                </div>
+                <button class="primary" type="submit">Guardar carga</button>
+              </form>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Mejores oportunidades</p>
+                  <h2>Intercambios sugeridos</h2>
+                </div>
+                <button class="ghost" data-view-jump="matches" type="button">Ver todos</button>
+              </div>
+              <div class="match-list compact" id="topMatches"></div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Movimiento</p>
+                <h2>Solicitudes recientes</h2>
+              </div>
+              <button class="ghost" data-view-jump="requests" type="button">Gestionar</button>
+            </div>
+            <div class="request-list" id="recentRequests"></div>
+          </section>
+
+          <div class="two-column profile-inventory-row">
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Mi perfil</p>
+                  <h2>Datos personales</h2>
+                </div>
+              </div>
+              <form class="member-form" id="accountProfileForm">
+                <label>
+                  Nombre visible
+                  <input id="accountProfileName" required placeholder="Ej: Gonzalo">
+                </label>
+                <label>
+                  Dato privado de contacto o ubicacion
+                  <input id="accountProfileLocation" required placeholder="Ej: Depto 1204 o WhatsApp apoderado">
+                </label>
+                <button class="primary" type="submit">Guardar cambios</button>
+              </form>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Resumen</p>
+                  <h2>Mis laminas</h2>
+                </div>
+              </div>
+              <div class="inventory-summary" id="profileInventory"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="album">
+          <section class="panel">
+            <div class="panel-heading album-toolbar">
+              <div>
+                <p class="eyebrow">Mi inventario</p>
+                <h2>Album Mundial 2026</h2>
+              </div>
+              <div class="toolbar-controls">
+                <input id="searchSticker" type="search" placeholder="Buscar pais o codigo">
+                <select id="sectionFilter"></select>
+              </div>
+            </div>
+            <div class="legend">
+              <span><i class="dot owned"></i>Tengo</span>
+              <span><i class="dot missing"></i>Me falta</span>
+              <span><i class="dot duplicate"></i>Repetida</span>
+            </div>
+            <div class="album-grid" id="albumGrid"></div>
+          </section>
+        </section>
+
+        <section class="view" id="matches">
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Cruce automatico</p>
+                <h2>Personas con intercambio posible</h2>
+              </div>
+            </div>
+            <div class="match-list" id="matchList"></div>
+          </section>
+        </section>
+
+        <section class="view" id="requests">
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Coordinacion</p>
+                <h2>Solicitudes de intercambio</h2>
+              </div>
+            </div>
+            <div class="request-list" id="requestList"></div>
+          </section>
+        </section>
+
+        <section class="view" id="community">
+          <div class="two-column">
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Integrantes</p>
+                  <h2>Comunidad activa</h2>
+                </div>
+              </div>
+              <div class="member-list" id="memberList"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Nuevo perfil</p>
+                  <h2>Agregar integrante</h2>
+                </div>
+              </div>
+              <form class="member-form" id="memberForm">
+                <label>
+                  Nombre
+                  <input id="memberName" required placeholder="Ej: Sofia R.">
+                </label>
+                <label>
+                  Dato privado de contacto o ubicacion
+                  <input id="memberLocation" required placeholder="Ej: Depto 1204 o WhatsApp apoderado">
+                </label>
+                <button class="primary" type="submit">Agregar a la comunidad</button>
+              </form>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js?v=20260613-album-spread"></script>
+    <script src="app.js?v=20260613-album-spread"></script>
+  </body>
+</html>
