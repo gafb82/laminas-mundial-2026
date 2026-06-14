@@ -943,6 +943,13 @@ function flagText(section) {
   return String.fromCodePoint(...[...letters].map((letter) => 127397 + letter.charCodeAt(0)));
 }
 
+function appShareUrl() {
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.hash = "";
+  return url.toString();
+}
+
 function renderProfilePanel() {
   const me = currentUser();
   const nameInput = $("#accountProfileName");
@@ -1041,7 +1048,7 @@ function duplicateShareText(user = currentUser()) {
     "",
     ...groupedLines,
     "Estoy llevando el registro en la app Laminas Mundial 2026:",
-    window.location.origin
+    appShareUrl()
   ].join("\n");
 }
 
@@ -1056,7 +1063,7 @@ async function shareMyDuplicates() {
   const shareData = {
     title: "Laminas repetidas para cambiar",
     text,
-    url: window.location.origin
+    url: appShareUrl()
   };
 
   if (navigator.share) {
